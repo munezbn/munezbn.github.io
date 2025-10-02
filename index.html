@@ -3,51 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeOeX - Automotive Innovations</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>BeOeX - Innovate Beyond the Ordinary</title>
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #7b68ee;
+            --accent: #ff6b9d;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin: 1rem 0;
+            background: linear-gradient(45deg, var(--light), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.2em;
+            animation: pulse 2s infinite;
+            position: relative;
+            width: 100%;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .plain {
+            background: linear-gradient(45deg, rgba(248, 249, 250, 0.9), rgba(123, 104, 238, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.95;
+        }
+        .highlight {
+            background: linear-gradient(45deg, rgba(0, 210, 255, 0.85), rgba(255, 107, 157, 0.75));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            min-width: 1em;
+            text-align: center;
+            opacity: 0.95;
+        }
+        .subtitle {
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            margin-top: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 3rem 0;
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        section:hover::before {
+            opacity: 1;
+            animation: shimmer 0.6s ease;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: var(--secondary);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: rotate(2deg) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .product-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--light);
+        }
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            header {
+                height: 80vh;
+                clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+                padding: 0 0.5rem;
+            }
+            main { 
+                padding: 2rem 1rem; 
+            }
+            section { 
+                margin: 2rem 0;
+                padding: 2rem 1.5rem;
+            }
+            .product-grid { 
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
+            }
+            .product-card {
+                padding: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                height: 70vh;
+                padding: 0 0.25rem;
+            }
+            h1 {
+                letter-spacing: 0.1em;
+            }
+            .subtitle {
+                padding: 0 0.5rem;
+            }
+            main { 
+                padding: 1.5rem 0.5rem; 
+            }
+            section { 
+                padding: 1.5rem 1rem;
+                margin: 1.5rem 0;
+            }
+            h2::after {
+                width: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">
-                <a href="index.html">BeOeX</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+        <h1><span class="highlight">B</span><span class="plain">e</span><span class="highlight">O</span><span class="plain">e</span><span class="highlight">X</span></h1>
+        <p class="subtitle">Exploding Boundaries: Where Applications and Products Defy Convention</p>
     </header>
-
+    
     <main>
-        <section class="hero">
-            <h1>Welcome to BeOeX</h1>
-            <p>Your solution for automotive innovations.</p>
-            <a href="about.html" class="btn">Learn More</a>
+        <section id="about">
+            <h2>Discover BeOeX</h2>
+            <p>BeOeX flips the script on innovation, reversing "BOX" to release a cascade of possibilities. As a dynamic company, we engineer adaptive applications and products for every sector imaginable. Tech disruptors? Creative catalysts? We've got the unboxed edge to supercharge your vision—delivering the unexpected with flair.</p>
         </section>
-
-        <section class="features">
-            <div class="feature">
-                <h2>Advanced Technology</h2>
-                <p>Integrating the latest automotive technologies for a better driving experience.</p>
+        
+        <section id="products">
+            <h2>Unleash Our Creations</h2>
+            <p>Dive into our eclectic lineup: versatile, visionary, and ready to reshape your reality.</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>AppX Pro</h3>
+                    <p>Revolutionary modular framework—integrate effortlessly, launch limitlessly.</p>
+                </div>
+                <div class="product-card">
+                    <h3>ProdForge</h3>
+                    <p>Lightning-fast prototyping powerhouse: concepts to reality in a flash.</p>
+                </div>
+                <div class="product-card">
+                    <h3>Innovate Hub</h3>
+                    <p>Dynamic cloud nexus for boundary-breaking collaborations.</p>
+                </div>
             </div>
-            <div class="feature">
-                <h2>Quality Assurance</h2>
-                <p>Ensuring top-notch quality in every product we deliver.</p>
-            </div>
-            <div class="feature">
-                <h2>Customer Support</h2>
-                <p>24/7 customer support to assist you with all your automotive needs.</p>
-            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Connect & Collaborate</h2>
+            <p>Eager to burst open new ideas? Reach out through our secure channels or track our explosive updates on social media.</p>
         </section>
     </main>
-
+    
     <footer>
-        <p>&copy; 2024 BeOeX. All rights reserved.</p>
+        <p>&copy; 2025 BeOeX. Rights Reversed & Reloaded. | <a href="#about">About</a> | <a href="#products">Products</a> | <a href="#contact">Contact</a></p>
     </footer>
-
-    <!-- Optional JavaScript -->
-    <script src="js/scripts.js"></script>
 </body>
 </html>
