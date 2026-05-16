@@ -1,264 +1,829 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeOeX - Innovate Beyond the Ordinary</title>
-    <style>
-        :root {
-            --primary: #00d2ff;
-            --secondary: #7b68ee;
-            --accent: #ff6b9d;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        header {
-            position: relative;
-            height: 100vh;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            padding: 0 1rem;
-            box-sizing: border-box;
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        h1 {
-            font-size: clamp(2rem, 8vw, 3.5rem);
-            margin: 1rem 0;
-            background: linear-gradient(45deg, var(--light), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.2em;
-            animation: pulse 2s infinite;
-            position: relative;
-            width: 100%;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        .plain {
-            background: linear-gradient(45deg, rgba(248, 249, 250, 0.9), rgba(123, 104, 238, 0.8));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0.95;
-        }
-        .highlight {
-            background: linear-gradient(45deg, rgba(0, 210, 255, 0.85), rgba(255, 107, 157, 0.75));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            padding: 0.3rem 0.6rem;
-            border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            font-weight: 900;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-            min-width: 1em;
-            text-align: center;
-            opacity: 0.95;
-        }
-        .subtitle {
-            font-size: clamp(1rem, 4vw, 1.4rem);
-            margin-top: 1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            padding: 0 1rem;
-            box-sizing: border-box;
-        }
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        section {
-            background: rgba(255, 255, 255, 0.05);
-            margin: 3rem 0;
-            padding: 3rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-        section:hover::before {
-            opacity: 1;
-            animation: shimmer 0.6s ease;
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        section:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        h2 {
-            color: var(--secondary);
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            text-align: center;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        h2::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .product-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        .product-card:hover {
-            transform: rotate(2deg) scale(1.05);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        .product-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            color: var(--light);
-        }
-        footer a {
-            color: var(--secondary);
-            text-decoration: none;
-        }
-        @media (max-width: 768px) {
-            header {
-                height: 80vh;
-                clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-                padding: 0 0.5rem;
-            }
-            main { 
-                padding: 2rem 1rem; 
-            }
-            section { 
-                margin: 2rem 0;
-                padding: 2rem 1.5rem;
-            }
-            .product-grid { 
-                grid-template-columns: 1fr; 
-                gap: 1.5rem;
-            }
-            .product-card {
-                padding: 1.5rem;
-            }
-        }
-        @media (max-width: 480px) {
-            header {
-                height: 70vh;
-                padding: 0 0.25rem;
-            }
-            h1 {
-                letter-spacing: 0.1em;
-            }
-            .subtitle {
-                padding: 0 0.5rem;
-            }
-            main { 
-                padding: 1.5rem 0.5rem; 
-            }
-            section { 
-                padding: 1.5rem 1rem;
-                margin: 1.5rem 0;
-            }
-            h2::after {
-                width: 30px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeOeX — Think Outside</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── CSS Variables ─────────────────────── */
+    :root {
+      --hue: 200;
+      --bg:        hsl(var(--hue), 18%, 6%);
+      --surface:   hsl(var(--hue), 14%, 11%);
+      --accent:    hsl(var(--hue), 90%, 60%);
+      --accent2:   hsl(calc(var(--hue) + 140), 80%, 65%);
+      --text:      hsl(var(--hue), 10%, 92%);
+      --muted:     hsl(var(--hue), 10%, 50%);
+      --edge:      hsl(var(--hue), 40%, 30%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+      transition: background 1.2s ease, color 1.2s ease;
+      cursor: none;
+    }
+
+    /* ─── Custom Cursor ─────────────────────── */
+    #cursor {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      width: 14px; height: 14px;
+      background: var(--accent);
+      mix-blend-mode: exclusion;
+      border-radius: 0;                /* box cursor! */
+      pointer-events: none;
+      transform: translate(-50%, -50%) rotate(0deg);
+      transition: width .15s, height .15s, background .4s;
+    }
+    #cursor.hover {
+      width: 44px; height: 44px;
+      background: var(--accent2);
+    }
+
+    /* ─── Hue Cycle Animation ───────────────── */
+    @keyframes hueShift {
+      0%   { --hue: 200; }
+      16%  { --hue: 280; }
+      33%  { --hue: 340; }
+      50%  { --hue: 30;  }
+      66%  { --hue: 100; }
+      83%  { --hue: 160; }
+      100% { --hue: 200; }
+    }
+    body { animation: hueShift 18s ease-in-out infinite alternate; }
+
+    /* ─── Noise Grain Overlay ───────────────── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 8000;
+      pointer-events: none;
+      opacity: .03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* ─── NAV ───────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid hsl(var(--hue), 30%, 18%);
+      background: hsla(var(--hue), 18%, 6%, .7);
+    }
+    .logo-mark {
+      display: flex; align-items: center; gap: .5rem;
+      text-decoration: none;
+    }
+    .logo-box {
+      width: 36px; height: 36px;
+      border: 2.5px solid var(--accent);
+      display: grid; place-items: center;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spinBox 8s linear infinite;
+    }
+    .logo-box::before {
+      content: '';
+      position: absolute; inset: 4px;
+      background: var(--accent);
+      opacity: .18;
+    }
+    .logo-box span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+    }
+    @keyframes spinBox {
+      0%   { transform: rotateY(0deg);   border-color: var(--accent);  }
+      50%  { transform: rotateY(180deg); border-color: var(--accent2); }
+      100% { transform: rotateY(360deg); border-color: var(--accent);  }
+    }
+    .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .15em;
+      color: var(--text);
+      line-height: 1;
+    }
+    /* B · O · X individual letter colors */
+    .letter-B { color: var(--accent);  }
+    .letter-O { color: var(--accent2); }
+    .letter-X { color: hsl(calc(var(--hue) + 60), 85%, 65%); }
+
+    .logo-text em { font-style: normal; }
+
+    /* ─── Coming Soon Popup ─────────────────── */
+    #coming-soon-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9998;
+      background: hsla(var(--hue), 18%, 4%, .75);
+      backdrop-filter: blur(10px);
+      align-items: center; justify-content: center;
+    }
+    #coming-soon-overlay.open { display: flex; }
+    .coming-soon-box {
+      border: 2px solid var(--accent);
+      background: var(--surface);
+      padding: 3.5rem 4rem;
+      text-align: center;
+      position: relative;
+      max-width: 420px; width: 90%;
+      animation: popIn .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn {
+      from { transform: scale(.85) translateY(20px); opacity: 0; }
+      to   { transform: scale(1)   translateY(0);    opacity: 1; }
+    }
+    .coming-soon-cube {
+      font-size: 2.2rem; display: inline-block; margin-bottom: 1rem;
+      animation: spinBox 4s linear infinite;
+    }
+    .coming-soon-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.6rem; letter-spacing: .12em;
+      color: var(--text); margin-bottom: .5rem;
+    }
+    .coming-soon-box p {
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem; letter-spacing: .15em;
+      color: var(--muted); text-transform: uppercase;
+      margin-bottom: 2rem; line-height: 1.7;
+    }
+    .cs-close {
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem; letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .7rem 2rem;
+      border: 1.5px solid var(--accent);
+      color: var(--accent); background: transparent;
+      cursor: none; transition: background .3s, color .3s;
+    }
+    .cs-close:hover { background: var(--accent); color: var(--bg); }
+    .cs-corner {
+      position: absolute; width: 12px; height: 12px;
+      border-color: var(--accent2); border-style: solid;
+    }
+    .cs-corner.tl { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+    .cs-corner.tr { top: -2px; right: -2px; border-width: 2px 2px 0 0; }
+    .cs-corner.bl { bottom: -2px; left: -2px; border-width: 0 0 2px 2px; }
+    .cs-corner.br { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+    nav ul {
+      list-style: none; display: flex; gap: 2.2rem;
+    }
+    nav ul a {
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem; letter-spacing: .12em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--muted);
+      transition: color .3s;
+    }
+    nav ul a:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem; letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .55rem 1.4rem;
+      border: 1.5px solid var(--accent);
+      color: var(--accent); background: transparent;
+      cursor: none; text-decoration: none;
+      transition: background .3s, color .3s;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--bg); }
+
+    /* ─── HERO ──────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 5rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(hsl(var(--hue), 30%, 18%) 1px, transparent 1px),
+        linear-gradient(90deg, hsl(var(--hue), 30%, 18%) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .25;
+      animation: gridPulse 6s ease-in-out infinite;
+    }
+    @keyframes gridPulse {
+      0%, 100% { opacity: .15; }
+      50%       { opacity: .3; }
+    }
+    .hero-left { position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem; letter-spacing: .25em;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 30px; height: 1.5px;
+      background: var(--accent);
+    }
+    .hero-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 10vw, 9rem);
+      line-height: .92;
+      letter-spacing: .04em;
+      color: var(--text);
+    }
+    .hero-h1 .accent-line {
+      display: block;
+      color: var(--accent);
+      -webkit-text-stroke: 2px var(--accent);
+      color: transparent;
+      animation: strokePulse 3s ease-in-out infinite;
+    }
+    @keyframes strokePulse {
+      0%, 100% { -webkit-text-stroke-color: var(--accent); }
+      50%       { -webkit-text-stroke-color: var(--accent2); }
+    }
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 1.05rem; line-height: 1.65;
+      color: var(--muted); max-width: 38ch;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 700; }
+    .hero-actions {
+      margin-top: 2.8rem;
+      display: flex; gap: 1.2rem; align-items: center;
+    }
+    .btn-primary {
+      font-family: 'DM Mono', monospace;
+      font-size: .8rem; letter-spacing: .15em;
+      text-transform: uppercase; text-decoration: none;
+      padding: .9rem 2.2rem;
+      background: var(--accent); color: var(--bg);
+      border: none; cursor: none;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background .35s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-ghost {
+      font-family: 'DM Mono', monospace;
+      font-size: .8rem; letter-spacing: .12em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--muted);
+      display: flex; align-items: center; gap: .5rem;
+      transition: color .3s;
+    }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost .arrow {
+      display: inline-block;
+      transition: transform .3s;
+    }
+    .btn-ghost:hover .arrow { transform: translateX(5px); }
+
+    /* ─── 3-D BOX HERO VISUAL ───────────────── */
+    .hero-right {
+      position: relative; z-index: 2;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .box-scene {
+      width: 260px; height: 260px;
+      perspective: 700px;
+    }
+    .box-3d {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateHero 12s linear infinite;
+    }
+    @keyframes rotateHero {
+      0%   { transform: rotateX(20deg) rotateY(0deg);   }
+      100% { transform: rotateX(20deg) rotateY(360deg); }
+    }
+    .face {
+      position: absolute; inset: 0;
+      border: 2px solid var(--accent);
+      background: hsla(var(--hue), 60%, 50%, .04);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem; letter-spacing: .15em;
+      color: var(--accent); opacity: .9;
+    }
+    .face.front  { transform: translateZ(130px); }
+    .face.back   { transform: rotateY(180deg) translateZ(130px); }
+    .face.left   { transform: rotateY(-90deg) translateZ(130px); }
+    .face.right  { transform: rotateY(90deg) translateZ(130px); }
+    .face.top    { transform: rotateX(90deg) translateZ(130px); font-size: 1rem; letter-spacing: .4em; }
+    .face.bottom { transform: rotateX(-90deg) translateZ(130px); font-size: 1rem; letter-spacing: .4em; }
+
+    /* glow under box */
+    .box-glow {
+      position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 180px; height: 30px;
+      background: var(--accent);
+      border-radius: 50%; filter: blur(30px); opacity: .35;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: .2; transform: translateX(-50%) scaleX(.8); }
+      50%       { opacity: .5; transform: translateX(-50%) scaleX(1.1); }
+    }
+
+    /* Pronunciation badge */
+    .pronounce-badge {
+      position: absolute; top: 0; right: 0;
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem; letter-spacing: .2em;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: .3rem .7rem;
+      text-transform: uppercase;
+      animation: fadeFloat 4s ease-in-out infinite;
+    }
+    @keyframes fadeFloat {
+      0%, 100% { transform: translateY(0); opacity: .8; }
+      50%       { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* ─── TICKER ────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--edge);
+      border-bottom: 1px solid var(--edge);
+      padding: .8rem 0;
+      background: var(--surface);
+    }
+    .ticker {
+      display: flex; gap: 0;
+      width: max-content;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: .25em;
+      padding: 0 2.5rem; color: var(--muted);
+      white-space: nowrap;
+    }
+    .ticker-item span { color: var(--accent); }
+
+    /* ─── ABOUT ─────────────────────────────── */
+    #about {
+      padding: 8rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: .8rem;
+    }
+    .section-h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1;
+      color: var(--text);
+    }
+    .section-h2 em { font-style: normal; color: var(--accent2); }
+    .section-body {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--muted); margin-top: 1.4rem; max-width: 48ch;
+    }
+
+    .pillars {
+      display: flex; flex-direction: column; gap: 1.4rem;
+    }
+    .pillar {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1rem; align-items: start;
+      padding: 1.4rem;
+      border: 1px solid var(--edge);
+      background: var(--surface);
+      transition: border-color .3s, transform .3s;
+    }
+    .pillar:hover { border-color: var(--accent); transform: translateX(6px); }
+    .pillar-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; color: var(--accent); line-height: 1;
+    }
+    .pillar-title {
+      font-size: .95rem; font-weight: 700; color: var(--text);
+      margin-bottom: .3rem;
+    }
+    .pillar-text { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── SERVICES GRID ─────────────────────── */
+    #services { padding: 8rem 5rem; }
+    #services .section-header { text-align: center; margin-bottom: 4rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--edge);
+    }
+    .service-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .35s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--accent);
+      transition: height .4s ease;
+    }
+    .service-card:hover { background: var(--surface); }
+    .service-card:hover::before { height: 100%; }
+    .service-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+      display: block;
+    }
+    .service-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: .08em;
+      color: var(--text); margin-bottom: .6rem;
+    }
+    .service-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── STATS ─────────────────────────────── */
+    #stats {
+      padding: 6rem 5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--edge);
+      border-bottom: 1px solid var(--edge);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--edge);
+    }
+    .stat-block {
+      background: var(--surface);
+      padding: 3rem 2rem; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem; color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: .4rem; display: block;
+    }
+
+    /* ─── CTA BAND ──────────────────────────── */
+    #cta {
+      padding: 10rem 5rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-bg-box {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: .04; pointer-events: none;
+    }
+    .cta-bg-box svg { width: 80%; max-width: 700px; }
+    #cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: .95; color: var(--text);
+      position: relative; z-index: 1;
+    }
+    #cta h2 em { font-style: normal; color: var(--accent); }
+    #cta p {
+      font-size: 1rem; color: var(--muted);
+      margin: 1.6rem auto; max-width: 44ch;
+      position: relative; z-index: 1;
+    }
+    .cta-actions {
+      display: flex; gap: 1.2rem;
+      justify-content: center;
+      position: relative; z-index: 1;
+      margin-top: 2.4rem;
+    }
+
+    /* ─── FOOTER ────────────────────────────── */
+    footer {
+      padding: 3rem 5rem;
+      border-top: 1px solid var(--edge);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer .logo-text { font-size: 1.2rem; }
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem; letter-spacing: .1em;
+      color: var(--muted);
+    }
+    footer nav { background: none; position: static; border: none; padding: 0; backdrop-filter: none; }
+    footer nav ul { gap: 1.5rem; }
+
+    /* ─── Scroll animations ─────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Responsive ────────────────────────── */
+    @media (max-width: 900px) {
+      #hero   { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+      #about  { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      #services { padding: 5rem 2rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      #stats { padding: 4rem 2rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 1.2rem 1.8rem; }
+      nav ul { display: none; }
+      #cta { padding: 6rem 2rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
+      footer nav { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1><span class="highlight">B</span><span class="plain">e</span><span class="highlight">O</span><span class="plain">e</span><span class="highlight">X</span></h1>
-        <p class="subtitle">Exploding Boundaries: Where Applications and Products Defy Convention</p>
-    </header>
-    
-    <main>
-        <section id="about">
-            <h2>Discover BeOeX</h2>
-            <p>BeOeX flips the script on innovation, reversing "BOX" to release a cascade of possibilities. As a dynamic company, we engineer adaptive applications and products for every sector imaginable. Tech disruptors? Creative catalysts? We've got the unboxed edge to supercharge your vision—delivering the unexpected with flair.</p>
-        </section>
-        
-        <section id="products">
-            <h2>Unleash Our Creations</h2>
-            <p>Dive into our eclectic lineup: versatile, visionary, and ready to reshape your reality.</p>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>AppX Pro</h3>
-                    <p>Revolutionary modular framework—integrate effortlessly, launch limitlessly.</p>
-                </div>
-                <div class="product-card">
-                    <h3>ProdForge</h3>
-                    <p>Lightning-fast prototyping powerhouse: concepts to reality in a flash.</p>
-                </div>
-                <div class="product-card">
-                    <h3>Innovate Hub</h3>
-                    <p>Dynamic cloud nexus for boundary-breaking collaborations.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="contact">
-            <h2>Connect & Collaborate</h2>
-            <p>Eager to burst open new ideas? Reach out through our secure channels or track our explosive updates on social media.</p>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 BeOeX. Rights Reversed & Reloaded. | <a href="#about">About</a> | <a href="#products">Products</a> | <a href="#contact">Contact</a></p>
-    </footer>
+
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo-mark">
+      <div class="logo-box"><span>B</span></div>
+      <span class="logo-text"><span class="letter-B">B</span>e<span class="letter-O">O</span>e<span class="letter-X">X</span></span>
+    </a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#stats">Impact</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Get Started</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+
+    <div class="hero-left reveal">
+      <p class="hero-eyebrow">Pronounced · B · O · X</p>
+      <h1 class="hero-h1">
+        Think<br>
+        <span class="accent-line">Outside</span><br>
+        The Box
+      </h1>
+      <p class="hero-sub">
+        <strong><span class="letter-B">B</span>e<span class="letter-O">O</span>e<span class="letter-X">X</span></strong> is where bold ideas break boundaries.
+        We build, launch, and scale things that weren't supposed to exist yet.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Explore What We Do</a>
+        <a href="#about" class="btn-ghost">Our Story <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="hero-right reveal" style="transition-delay:.2s">
+      <div class="pronounce-badge">/ biː · oʊ · ɛks /</div>
+      <div class="box-scene">
+        <div class="box-3d">
+          <div class="face front">Be</div>
+          <div class="face back">OeX</div>
+          <div class="face left">B</div>
+          <div class="face right">O·X</div>
+          <div class="face top">THINK OUTSIDE</div>
+          <div class="face bottom">BeOeX.COM</div>
+        </div>
+      </div>
+      <div class="box-glow"></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">BeOEx <span>★</span></span>
+      <span class="ticker-item">B · O · X <span>★</span></span>
+      <span class="ticker-item">Think Outside <span>★</span></span>
+      <span class="ticker-item">Bold Ideas <span>★</span></span>
+      <span class="ticker-item">Break Boundaries <span>★</span></span>
+      <span class="ticker-item">BeOEx <span>★</span></span>
+      <span class="ticker-item">B · O · X <span>★</span></span>
+      <span class="ticker-item">Think Outside <span>★</span></span>
+      <span class="ticker-item">Bold Ideas <span>★</span></span>
+      <span class="ticker-item">Break Boundaries <span>★</span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label">// Who we are</p>
+      <h2 class="section-h2">Built for the <em>Uncommon</em></h2>
+      <p class="section-body">
+        <span class="letter-B">B</span>e<span class="letter-O">O</span>e<span class="letter-X">X</span> — spell it out and you've already said it: <strong>B · O · X</strong>.
+        We exist for teams who refuse to operate inside predefined containers.
+        From idea to impact, we're the partner that makes the impossible ship.
+      </p>
+    </div>
+    <div class="pillars reveal" style="transition-delay:.15s">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <div>
+          <p class="pillar-title">Bold by Design</p>
+          <p class="pillar-text">Every decision we make starts with one question: is this brave enough?</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <div>
+          <p class="pillar-title">Outside the Expected</p>
+          <p class="pillar-text">We reject the template. Every project is a blank canvas with sharp edges.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <div>
+          <p class="pillar-title">Execute Without Limits</p>
+          <p class="pillar-text">Thinking is easy. Shipping is the sport. We finish what others only plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header reveal">
+      <p class="section-label">// What we do</p>
+      <h2 class="section-h2">Inside Every <em>Service</em></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon">⬡</span>
+        <h3 class="service-title">Product Strategy</h3>
+        <p class="service-desc">We map the future before the market knows it exists. Vision, roadmap, and ruthless prioritisation.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.08s">
+        <span class="service-icon">◈</span>
+        <h3 class="service-title">Design Systems</h3>
+        <p class="service-desc">Interfaces that are felt before they're understood. Brand-first, pixel-obsessed craft.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.16s">
+        <span class="service-icon">▣</span>
+        <h3 class="service-title">Engineering</h3>
+        <p class="service-desc">Full-stack, edge-native, AI-augmented. We build things that scale from day one.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.08s">
+        <span class="service-icon">◉</span>
+        <h3 class="service-title">Growth & Launch</h3>
+        <p class="service-desc">Launch isn't the finish line, it's the starting pistol. We run the whole race with you.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.16s">
+        <span class="service-icon">⬟</span>
+        <h3 class="service-title">AI Integration</h3>
+        <p class="service-desc">We wire intelligence into products where it actually matters — not as a gimmick.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.24s">
+        <span class="service-icon">◫</span>
+        <h3 class="service-title">Consulting</h3>
+        <p class="service-desc">Workshops, audits, fractional leadership. Get the expertise without the overhead.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-block reveal">
+        <span class="stat-num">120+</span>
+        <span class="stat-label">Projects Shipped</span>
+      </div>
+      <div class="stat-block reveal" style="transition-delay:.08s">
+        <span class="stat-num">40+</span>
+        <span class="stat-label">Clients Worldwide</span>
+      </div>
+      <div class="stat-block reveal" style="transition-delay:.16s">
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Retention Rate</span>
+      </div>
+      <div class="stat-block reveal" style="transition-delay:.24s">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Ideas Possible</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-bg-box" aria-hidden="true">
+      <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="50" y="50" width="400" height="400" stroke="currentColor" stroke-width="2"/>
+        <rect x="100" y="100" width="300" height="300" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="150" y="150" width="200" height="200" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </div>
+    <h2 class="reveal">Ready to Step<br><em>Outside?</em></h2>
+    <p class="reveal">Let's build something that doesn't have a name yet.</p>
+    <div class="cta-actions reveal">
+      <a href="mailto:hello@beoex.com" class="btn-primary">Say Hello</a>
+      <a href="#about" class="btn-ghost">Learn More <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="logo-mark">
+      <div class="logo-box"><span>B</span></div>
+      <span class="logo-text"><span class="letter-B">B</span>e<span class="letter-O">O</span>e<span class="letter-X">X</span></span>
+    </a>
+    <p>© 2026 <span class="letter-B">B</span>e<span class="letter-O">O</span>e<span class="letter-X">X</span>. Think outside.</p>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#cta">Contact</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <!-- COMING SOON POPUP -->
+  <div id="coming-soon-overlay" role="dialog" aria-modal="true" aria-label="Coming Soon">
+    <div class="coming-soon-box">
+      <div class="cs-corner tl"></div>
+      <div class="cs-corner tr"></div>
+      <div class="cs-corner bl"></div>
+      <div class="cs-corner br"></div>
+      <span class="coming-soon-cube">⬡</span>
+      <h3><span class="letter-B">B</span>e<span class="letter-O">O</span>e<span class="letter-X">X</span></h3>
+      <p>This page is coming soon.<br>We're building something bold.</p>
+      <button class="cs-close" id="cs-close-btn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Cursor
+    const cur = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+    });
+
+    // ── Coming Soon popup for external links
+    const overlay  = document.getElementById('coming-soon-overlay');
+    const closeBtn = document.getElementById('cs-close-btn');
+
+    function showComingSoon(e) {
+      e.preventDefault();
+      overlay.classList.add('open');
+    }
+    function hideComingSoon() {
+      overlay.classList.remove('open');
+    }
+
+    // Intercept any link that points outside the page (not #anchors)
+    document.querySelectorAll('a').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const isAnchor   = href.startsWith('#');
+      const isInternal = isAnchor || href === '';
+      if (!isInternal) {
+        link.addEventListener('click', showComingSoon);
+      }
+    });
+
+    closeBtn.addEventListener('click', hideComingSoon);
+    overlay.addEventListener('click', e => { if (e.target === overlay) hideComingSoon(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideComingSoon(); });
+
+    // ── Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ── Duplicate ticker for seamless loop
+    const ticker = document.querySelector('.ticker');
+    ticker.innerHTML += ticker.innerHTML;
+  </script>
 </body>
 </html>
